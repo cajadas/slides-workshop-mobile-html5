@@ -320,7 +320,7 @@
           <li>A list of URLs — HTML, CSS, JavaScript, images, or any other resource</li>
         </ul>
         <ul>
-          <li>The home page of the offline web application points this list, called a <b>manifest file</b></li>
+          <li>The home page of the offline web application points the list, called a <b>manifest file</b></li>
           <ul>
             <li>Reads the list of URLs from the manifest file</li>
             <li>Downloads the resources</li>
@@ -350,6 +350,8 @@
     <hgroup>
       <h2>Offline Support</h2>
       <h3>How?</h3>
+    </hgroup>
+    <article class="smaller">
       <ul class="build">
         <li><p>Application Cache</p></li>
         <ul>
@@ -369,9 +371,217 @@
           <li><a href="http://www.w3.org/TR/IndexedDB/">http://www.w3.org/TR/IndexedDB/</a></li>
         </ul>
       </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Offline Support</h2>
+      <h3>Application Cache</h3>
+    </hgroup>
+    <article class="smaller">
+      <ul class="build">
+        <li>Caching of static resources (images, CSS, etc) and executable javascript code</li>
+        <li>Storing limits vary between browsers</li>
+        <li>Manifest file</li>
+        <ul>
+          <li>CACHE - Files that will be cached after they are downloaded for the first time</li>
+          <li>NETWORK - Files that will <b>never</b> be cached (require a connection to the server)</li>
+          <li>FALLBACK - Fallback pages if a page is inaccessible</li>
+        </ul>
+        <pre class="prettyprint" data-lang="html">
+&lt;!DOCTYPE html>
+&lt;html manifest="example.manifest">
+...
+&lt;/html>
+        </pre>
+        <li>A manifest file needs to be served with the correct MIME-type, which is "text/cache-manifest"</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Offline Support</h2>
+      <h3>Application Cache</h3>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+        <code>CACHE MANIFEST</code><br>
+        <code># 2011-07-07:v1</code><br>
+        <code>/style.css</code><br>
+        <code>/code.js</code><br>
+        <code>/image1.jpg</code><br>
+        <code>/counter_offline.html</code><br><br>
+        <code>NETWORK:</code><br>
+        <code>/counter.php</code><br><br>
+        <code>FALLBACK:</code><br>
+        <code>/counter.php /counter_offline.html</code>
+      </ul>
+      <ul class="build">
+        <li>Exercise</li>
+        <ul>
+          <li>Based on this example, write a manifest file for the workshop's page to cache the images</li>
+        </ul>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Offline Support</h2>
+      <h3>Application Cache</h3>
     </hgroup>
     <article>
-      
+      <ul>
+       <li>After a successful appcache update, the new code version is <b>not</b> at use until the next page reload</li><br>
+       <pre class="prettyprint" data-lang="javascript">
+if (window.applicationCache) {
+  applicationCache.addEventListener('updateready', function() {
+    if (confirm('An update is available. Reload now?'))
+      window.location.reload();
+  });
+}
+        </pre>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Offline Support</h2>
+      <h3>Web Storage</h3>
+    </hgroup>
+    <article class="smaller">
+      <ul class="build">
+        <li><b>Synchronous</b> browser API to store data in key/value pairs (key and value must be strings)</li>
+        <li>Limited storage (different for each browser)</li>
+        <li>Supported in IE 8+, Firefox, Opera, Chrome, and Safari</li>
+        <li>Storage Interface</li>
+        <pre class="prettyprint" data-lang="javascript">
+interface Storage {
+  readonly attribute unsigned long length;
+  DOMString? key(unsigned long index);
+  getter DOMString getItem(DOMString key);
+  setter creator void setItem(DOMString key, DOMString value);
+  deleter void removeItem(DOMString key);
+  void clear();
+};
+        </pre>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Offline Support</h2>
+      <h3>Web Storage</h3>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Session Storage</li>
+        <ul>
+          <li>Exists for the duration of the session</li>
+          <li>Each window/tab has access to a distinct storage area (not shared)</li>
+        </ul>
+        <li>Local Storage</li>
+        <ul>
+          <li>Presents no expiration date</li>
+          <li>Each domain presents an isolated DB</li>
+        </ul>
+        <li>Respects the Same-Origin Policy</li>
+        <li>Demo time!</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Offline Support</h2>
+      <h3>Web SQL</h3>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><b>Asynchronous</b> browser API to store data using SQL(ish) syntax (SQLite)</li>
+        <li>Allows storing larger quantities of data than Web Storage</li>
+        <li>Available for Opera and Webkit browsers</li>
+        <ul>
+          <li>All iOS and Android devices use Webkit</li><br><br>
+        </ul>
+        <li><span style="color:red"><b>DEPRECATED</b></span></li>
+        <ul>
+          <li>W3C is working on an alternative API: <b>IndexedDB</b> (only available for Chrome, Firefox and IE 10)</li>
+        </ul>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Offline Support</h2>
+      <h3>Web SQL</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Transaction syntax</li>
+        <pre class="prettyprint" data-lang="javascript">
+db.transaction(function(t) {
+  tx.executeSql(sqlStatement, arguments, callback, errorCallback);
+});
+        </pre>
+        <li>Exercise</li>
+        <ul class="build">
+          <li>Complete the getTasks and storeTask functions on the Web SQL example</li>
+        </ul>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Native look-and-feel</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Tip #1: Do <b>NOT</b> use a back button on your Android Web App layout</li>
+        <ul>
+          <li>Android devices already present a back button that allows back navigation on the browser</li>
+          <li>Does not require keeping the navigation history</li>
+        </ul>
+        <li>Quick Fix</li>
+        <ul>
+          <li>Sniff the user-agent to detect Android devices</li>
+          <li>In case the device is running Android, add the class <code>.android</code> to the body</li>
+          <li>Hide back button using CSS</li>
+          <pre class="prettyprint" data-lang="css">
+.android .back-button {
+  visibility : hidden; 
+} 
+          </pre>
+        </ul>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Native look-and-feel</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Tip #2: Listen to touchEnd events instead of click events</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Native look-and-feel</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Tip #3: Meta-tag your iOS web app</li>
+      </ul>
     </article>
   </slide>
 
