@@ -28,8 +28,26 @@
   </slide>
 
   <slide class="logoslide nobackground">
-    <article class="flexbox vcenter">
-      <span>git clone git@github.com:cajadas/workshop-mobile-html5.git</span>
+    <hgroup>
+      <h2>Setup</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Download sample project</li>
+        <ul>
+          <li>git clone git@github.com:cajadas/workshop-mobile-html5.git</li>
+          <li>https://github.com/cajadas/workshop-mobile-html5 <code>-></code> ZIP</li>
+        </ul>
+        <li>Serve the sample project using Apache</li>
+        <ul>
+          <li>Linux <code>-></code> /var/www</li>
+          <li>XAMPP/MAMP <code>-></code> /htdocs</li>
+        </ul>
+        <li>Google Chrome</li>
+        <li>Localtunnel</li>
+        <ul>
+          <li>Easy share of localhost server</li>
+      </ul>
     </article>
   </slide>
   
@@ -114,26 +132,21 @@
     </article>
   </slide>
 
-  <slide>
+  <slide class="why">
     <hgroup>
       <h2>Responsive Web Design</h2>
       <h3>Why?</h3>
     </hgroup>
-    <article>
-      <ul class="build">
-        <li><a href="http://www.gartner.com/newsroom/id/1278413">Gartner research</a> suggests that by 2013, mobile phones will overtake PCs as the most common Web access device worldwide.</li>
-        <li>The mobile devices market is still fragmented</li>
-        <ul>
-          <li>A wide variety of screen sizes and input methods</li>
-        </ul>
-      </ul>
+    <img src="images/why.png">
+    <article class="flexbox g-reference" style="margin-top: 15px;">
+      <span>http://cdn.dotcominfoway.com/images/responsive-web-design-infographic.jpg</span>
     </article>
   </slide>
   
   <slide>
     <hgroup>
       <h2>Responsive Web Design</h2>
-      <h3>Strategies</h3>
+      <h3>Three Strategies</h3>
     </hgroup>
     <article class="smaller">
       <ul class="build">
@@ -176,11 +189,11 @@
   <slide>
     <hgroup>
       <h2>Responsive Web Design</h2>
-      <h3>Strategies</h3>
+      <h3>Three Strategies</h3>
     </hgroup>
     <article>
       <ul class="build">
-        <li>An hybrid solution</li>
+        <li>Strategy #3: An hybrid solution</li>
         <ul>
           <li>Three web pages: 1 for desktops, 1 for tablets & 1 for mobile phones</li>
           <li>Server-side sniffing to identify the device</li>
@@ -199,20 +212,22 @@
     <article class="smaller">
       <ul class="build">
         <li><p>Viewport</p></li>
-          <ul>
-            <li>Meta tag in the head of the page to control the page's width, height, zoom level, dpis, etc.</li>
-          </ul>
-        <pre class="prettyprint" data-lang="html">
+        <ul>
+          <li style="width:59%">Meta tag in the head of the page to control the page's width, height, zoom level, dpis, etc.</li>
+        </ul>
+        <img class="without_viewport" src="images/without_viewport.png">
+        <img class="with_viewport" src="images/with_viewport.png">
+        <pre class="prettyprint" style="width: 64%;" data-lang="html">
 &lt;meta name="viewport" content="width=device-width">
         </pre>
         <li><p>CSS Media queries</p></li>
         <ul>
-          <li>Media queries are conditional hooks for applying different CSS rules, depending on e.g. browser width, height, orientation, aspect ratio, etc.</li>
+          <li style="width:59%">Conditional hooks for applying different CSS rules, depending on e.g. browser width, height, orientation, aspect ratio, etc.</li>
         </ul>
-        <pre class="prettyprint" data-lang="css">
-@media screen and (min-width: 480px) and (max-width: 800px) {
+        <pre class="prettyprint" style="width: 64%;" data-lang="css">
+@media screen and (min-width: 480px) 
+                              and (max-width: 800px) {
    body {font-family:"Comic Sans MS", fantasy, cursive;}
-/* [etc] */
 } 
         </pre>
       </ul>
@@ -228,13 +243,13 @@
       <ul class="build">
         <li><p>Viewport</p></a></li>
           <ul>
-            <li>Keep the page content inside the device's width</li>
+            <li>Make page content aware of the device's <b>width</b></li>
           </ul>
           <pre class="prettyprint" data-lang="html">
 &lt;meta name="viewport" content="width=device-width">
           </pre>
           <ul>
-            <li>Keep the page content scaled during orientation change</li>
+            <li>Keep the page content scaled during orientation change (hint: <b>initial-scale</b>)</li>
           </ul>
           <pre class="prettyprint" data-lang="html">
 &lt;meta name="viewport" content="width=device-width, initial-scale=1">
@@ -267,7 +282,7 @@
 @media only screen and (min-width: 768px) and (max-width: 959px) { }
         </pre>
         <ul>
-          <li>Use the existing media queries to position the Byclosure logo properly (use padding-right)</li>
+          <li>Use the existing media queries to position the Byclosure logo properly (use <b>padding-right</b>)</li>
         </ul>
         <pre class="prettyprint" style="line-height: 17px;" data-lang="css">
   @media only screen and (max-width: 1920px) {
@@ -355,13 +370,12 @@
       <ul class="build">
         <li><p>Application Cache</p></li>
         <ul>
-          <li>A web application is cached, and accessible without an internet connection</li>
+          <li>A web application <b>static content</b> is cached, and accessible without an internet connection</li>
           <li><a href="http://www.w3.org/TR/offline-webapps/#offline">http://www.w3.org/TR/offline-webapps/#offline</a></li>
         </ul>
         <li><p>Web Storage</p></li>
         <ul>
-          <li>A web page can store data locally within the user's browser</li>
-          <li>Session storage and Local storage</li>
+          <li>A web page can store data locally within the browser</li>
           <li><a href="http://dev.w3.org/html5/webstorage">http://dev.w3.org/html5/webstorage</a></li>
         </ul>
         <li><p>Web SQL & IndexedDB</p></li>
@@ -422,6 +436,7 @@
         <li>Exercise</li>
         <ul>
           <li>Based on this example, write a manifest file for the workshop's page to cache the images</li>
+          <li>Use '*' on the NETWORK list to garantee the remaining resources are downloaded</li>
         </ul>
       </ul>
     </article>
@@ -490,7 +505,10 @@ interface Storage {
           <li>Each domain presents an isolated DB</li>
         </ul>
         <li>Respects the Same-Origin Policy</li>
-        <li>Demo time!</li>
+        <li>Exercise</li>
+        <ul>
+          <li>Add a field 'Description' to Task List</li>
+        </ul>
       </ul>
     </article>
   </slide>
@@ -523,16 +541,20 @@ interface Storage {
     </hgroup>
     <article>
       <ul>
+        <li>Open database</li>
+        <pre class="prettyprint" data-lang="javascript">
+openDatabase(in DOMString name, in DOMString version, 
+in DOMString displayName, in unsigned long estimatedSize, 
+in optional DatabaseCallback creationCallback);
+        </pre>
+        
         <li>Transaction syntax</li>
         <pre class="prettyprint" data-lang="javascript">
 db.transaction(function(t) {
-  tx.executeSql(sqlStatement, arguments, callback, errorCallback);
+  t.executeSql(sqlStatement, arguments, callback, errorCallback);
 });
         </pre>
-        <li>Exercise</li>
-        <ul class="build">
-          <li>Complete the getTasks and storeTask functions on the Web SQL example</li>
-        </ul>
+        <li>Demo time!</li>
       </ul>
     </article>
   </slide>
@@ -546,12 +568,12 @@ db.transaction(function(t) {
         <li>Tip #1: Do <b>NOT</b> use a back button on your Android Web App layout</li>
         <ul>
           <li>Android devices already present a back button that allows back navigation on the browser</li>
-          <li>Does not require keeping the navigation history</li>
+          <li>Does not require keeping navigation history</li>
         </ul>
         <li>Quick Fix</li>
         <ul>
           <li>Sniff the user-agent to detect Android devices</li>
-          <li>In case the device is running Android, add the class <code>.android</code> to the body</li>
+          <li>If the device is running Android, add the class <code>.android</code> to the body</li>
           <li>Hide back button using CSS</li>
           <pre class="prettyprint" data-lang="css">
 .android .back-button {
@@ -569,7 +591,17 @@ db.transaction(function(t) {
     </hgroup>
     <article>
       <ul class="build">
-        <li>Tip #2: Listen to touchEnd events instead of click events</li>
+        <li>Tip #2: Listen to touchStart/End events instead of click events</li>
+        <ul>
+          <li>iOS devices take 300ms to figure out a click event from touch events</li>
+          <li>Multiple 300ms delay periods can became really annoying</li>
+        </ul>
+        <li>Quick Fix</li>
+        <ul>
+          <li>Custom tap detection listening to both touchStart and touchEnd events</li>
+          <li>Just listening for touchStart may do the trick</li>
+          <li><a href="http://cubiq.org/remove-onclick-delay-on-webkit-for-iphone">http://cubiq.org/remove-onclick-delay-on-webkit-for-iphone</a></li>
+        </ul>
       </ul>
     </article>
   </slide>
@@ -581,6 +613,76 @@ db.transaction(function(t) {
     <article>
       <ul class="build">
         <li>Tip #3: Meta-tag your iOS web app</li>
+        <ul>
+          <li style="width: 64%;">iOS devices allow adding web pages to the home screen</li>
+        </ul>
+        <img class="home1" src="images/home_1.png">
+        <img class="with_viewport" src="images/home_2.png">
+        <ul>
+          <li style="width: 64%;">Apple custom tags to set properties like: </li>
+          <article class="smaller">
+            <ul>
+              <li style="width: 64%;"><code>apple-touch-icon</code></li>
+              <li style="width: 64%;"><code>apple-touch-startup-image</code></li>
+              <li style="width: 64%;"><code>apple-mobile-web-app-capable</code> (fullscreen)</li>
+              <li style="width: 64%;"><code>apple-mobile-web-app-status-bar-style</code></li>
+            </ul>
+          </article>
+        </ul>
+        <ul>
+          <li style="width: 64%;">Some tags are also Android compatible</li>
+        </ul>
+        <ul>
+          <li style="width: 64%;">Make a huge difference regarding user experience</li>
+        </ul>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Native look-and-feel</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Tip #4: Disable tap highlight</li>
+        <ul>
+          <li>Tap highlight occurs when the browser figures out a click event on a DOM element</li>
+          <li>Is a dead giveaway of a non-native app</li>
+        </ul>
+        <li>Quick Fix</li>
+        <ul>
+          <li>Make the highlight color transparent using CSS</li>
+        </ul>
+        <pre class="prettyprint" data-lang="css">
+-webkit-tap-highlight-color:rgba(0,0,0,0);
+        </pre>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Native look-and-feel</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Tip #5: Velocity scrolling on iOS</li>
+        <ul>
+          <li>Several mechanisms nowadays to simulate iOS scrolling behaviour</li>
+          <li>Most of them lag the web app by listening to every touch and scroll related events</li>
+        </ul>
+        <li>Quick Fix</li>
+        <pre class="prettyprint" data-lang="css">
+overflow: scroll;
+-webkit-overflow-scrolling: touch;
+        </pre>
+        <ul>
+          <li>Introduced on iOS 5</li>
+        </ul>
+        <ul>
+          <li>Still a little buggy</li>
+        </ul>
       </ul>
     </article>
   </slide>
@@ -616,7 +718,7 @@ db.transaction(function(t) {
         <div class="job">
           <p><em>Agile Software Developer</em>  (full-time)</p>
            <ul>
-            <li>Licenciate/Master's degree in Software Engineering</li>
+            <li>Bachelor/Master's degree in Software Engineering</li>
             <li><b>HTML5</b> for <b>RIAs</b> and <b>multi-device</b></li>
           </ul>  
         </div>
