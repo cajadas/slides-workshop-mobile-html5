@@ -16,7 +16,7 @@ var SLIDE_CONFIG = {
 
   // Author information
   presenters: [{
-    name: 'Manuel Cajada',
+    name: 'Manuel Cajada (manuel.cajada@byclosure.com)',
     company: 'Software Developer, Byclosure',
     github: 'https://github.com/cajadas'
   }]
